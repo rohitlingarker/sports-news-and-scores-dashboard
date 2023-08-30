@@ -1,4 +1,3 @@
-import React from "react";
 import { MatchItem } from "../../context/matches/reducer";
 
 type Props = {

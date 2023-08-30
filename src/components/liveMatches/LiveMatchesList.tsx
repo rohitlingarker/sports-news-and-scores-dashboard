@@ -9,7 +9,7 @@ export default function LiveMatchesList() {
   const matchesDispatch = useMatchesDispatch();
   useEffect(()=>{
     fetchMatches(matchesDispatch);
-  },[])
+  },[matchesDispatch])
   if (state){
     const { matches, isLoading, isError, errorMessage } = state;
     

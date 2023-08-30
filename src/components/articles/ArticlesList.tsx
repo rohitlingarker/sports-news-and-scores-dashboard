@@ -9,7 +9,7 @@ export default function ArticlesList() {
     const articlesDispatch = useArticlesDispatch();
     useEffect(()=>{
       fetchArticles(articlesDispatch);
-    },[])
+    },[articlesDispatch])
     if (state){
       const { articles, isLoading, isError, errorMessage } = state;
       

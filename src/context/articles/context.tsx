@@ -21,5 +21,7 @@ const ArticleStateContext = createContext<ArticleState | undefined>(undefined);
       );
     };
 
+    // eslint-disable-next-line react-refresh/only-export-components
     export const useArticleState = () => useContext(ArticleStateContext);
+    // eslint-disable-next-line react-refresh/only-export-components
     export const useArticlesDispatch = () => useContext(ArticlesDispatchContext);

@@ -1,6 +1,6 @@
 
 
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { API_ENDPOINT } from '../../config/constants';
 
 export default function ArticleContent(props: { id: number; }) {
