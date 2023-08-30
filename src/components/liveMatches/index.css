@@ -1,0 +1,12 @@
+.list{
+    
+    overflow-x: scroll;
+    display: flex;
+}
+.list >*{
+    box-sizing: border-box;
+    min-width: 20vw;
+    margin: 0 4px;
+    border-radius: 8px;
+    border:2px solid #000
+}
