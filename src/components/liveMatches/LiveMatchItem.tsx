@@ -19,6 +19,7 @@ export default function LiveMatchItem(props: Props) {
 
   useEffect(()=>{
     refresh();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   
