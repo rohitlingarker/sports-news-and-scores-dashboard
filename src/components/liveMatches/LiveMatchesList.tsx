@@ -14,7 +14,7 @@ export default function LiveMatchesList() {
     const { matches, isLoading, isError, errorMessage } = state;
     
   
-  console.log(matches);
+  console.log("matches in livelist",matches);
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -31,7 +31,7 @@ export default function LiveMatchesList() {
         return (
           <div
             key={matchItem.id}
-            className="box-border min-w-[20vw] mx-4 border-2 border-black rounded-lg"
+            className={`${matchItem.isRunning?`bg-gray-800`:`bg-gray-700`} shadow-sm shadow-blue-600 rounded-md text-gray-100 mx-2 px-3 py-2 w-52 inline-block  hover:shadow-md hover:shadow-blue-300`}
           >
             <LiveMatchItem match={matchItem} />
           </div>

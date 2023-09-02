@@ -3,8 +3,8 @@ import ArticlesList from "./ArticlesList";
 const Articles = ()=>{
     return(
         <div className="live-matches-container">
-            <h1 className="text-3xl font-bold underline">Trending News</h1>
-            <div className="">
+            <h1 className="text-xl font-bold underline mb-2">Trending News</h1>
+            <div className="max-w-4xl">
                 <ArticlesList/>
             </div>
         </div>

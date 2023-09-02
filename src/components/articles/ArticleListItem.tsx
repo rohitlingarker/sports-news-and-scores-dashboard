@@ -1,40 +1,49 @@
-        import { Fragment, Suspense, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
+import { Fragment, Suspense, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 import { ArticleItem } from "../../context/articles/reducer";
-import React from 'react';
+import React from "react";
 // import ArticleContent from './ArticleContent';
-const ArticleContent = React.lazy(()=>import("./ArticleContent"))
+const ArticleContent = React.lazy(() => import("./ArticleContent"));
 
-interface Props{
-    article:ArticleItem
+interface Props {
+  article: ArticleItem;
 }
 
 export default function ArticleListItem(props: Props) {
-    const article = props.article;
-    const [isOpen, setIsOpen] = useState(false)
-  
-    function closeModal() {
-      setIsOpen(false)
-    }
-  
-    function openModal() {
-      setIsOpen(true)
-    }
-  
-    return (
-      <div className='border m-1'>
-            <p className='text-gray-700'>
-                {article.sport.name}
-            </p>
-        <div className='flex h-20'>
-            <img className='h-full aspect-auto' src={article.thumbnail} />
-            <div>
-                <h2 className='font-bold'>{article.title}</h2>
-                <p>{article.summary}</p>
-            </div>
+  const article = props.article;
+  const [isOpen, setIsOpen] = useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function formatDate(s: string) {
+    const d = new Date(s);
+    // return date in "Month date, year ,time" format
+
+    return `${d.toLocaleString("default", {
+      month: "short",
+    })} ${d.getDate()},${d.getFullYear()} `;
+  }
+
+  return (
+    <div className="rounded mt-2 p-2 flex h-32 shadow-md">
+      
+      <div className="w-1/6 inline-block h-full relative mr-2">
+        <img className="h-4/5 aspect-auto mx-auto mt-2 rounded-xl" src={article.thumbnail} />
+      </div>
+      <div className="inline-block w-4/5">
+        <div>
+          <h2 className="text-lg font-semibold ">{article.title}</h2>
+          <p className="text-base">{article.summary}</p>
         </div>
-        
+
         <div className="">
+          <p>{formatDate(article.date)}</p>
           <button
             type="button"
             onClick={openModal}
@@ -43,7 +52,7 @@ export default function ArticleListItem(props: Props) {
             Read More
           </button>
         </div>
-  
+
         <Transition appear show={isOpen} as={Fragment}>
           <Dialog as="div" className="relative z-10" onClose={closeModal}>
             <Transition.Child
@@ -57,7 +66,7 @@ export default function ArticleListItem(props: Props) {
             >
               <div className="fixed inset-0 bg-black bg-opacity-25" />
             </Transition.Child>
-  
+
             <div className="fixed inset-0 overflow-y-auto">
               <div className="flex min-h-full items-center justify-center p-4 text-center">
                 <Transition.Child
@@ -77,12 +86,13 @@ export default function ArticleListItem(props: Props) {
                       {article.title}
                     </Dialog.Title>
                     <div className="mt-2">
-                        <Suspense fallback={<div className='suspense'>Loading...</div>}>
-                            <ArticleContent id={article.id}/>
-
-                        </Suspense>
+                      <Suspense
+                        fallback={<div className="suspense">Loading...</div>}
+                      >
+                        <ArticleContent id={article.id} />
+                      </Suspense>
                     </div>
-  
+
                     <div className="mt-4">
                       <button
                         type="button"
@@ -99,6 +109,6 @@ export default function ArticleListItem(props: Props) {
           </Dialog>
         </Transition>
       </div>
-    )
-  }
-  
+    </div>
+  );
+}
