@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import React, { Fragment, useState } from "react";
+import { Fragment, useState } from "react";
 
 export default function Preferences() {
   const [isOpen, setIsOpen] = useState(false);
