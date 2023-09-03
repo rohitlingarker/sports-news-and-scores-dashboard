@@ -33,7 +33,7 @@ const SigninForm: React.FC = () => {
       const data = await response.json();
 
       // Dialogue: After successful signin, first we will save the token in localStorage
-      localStorage.setItem('authToken', data.token);
+      localStorage.setItem('authToken', data.auth_token);
       localStorage.setItem('userData', JSON.stringify(data.user));
 
       

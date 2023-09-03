@@ -13,7 +13,7 @@ const Home: React.FC = () => {
     // Handle sign out logic, e.g., remove authToken from localStorage
     localStorage.removeItem('authToken');
     localStorage.removeItem('userData');
-    navigate('/signin');
+    navigate('/dashboard');
     // Perform any other necessary cleanup or redirection
   };
 

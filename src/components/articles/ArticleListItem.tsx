@@ -12,6 +12,7 @@ interface Props {
 export default function ArticleListItem(props: Props) {
   const article = props.article;
   const [isOpen, setIsOpen] = useState(false);
+  const [isSliding, setSliding] = useState(false);
 
   function closeModal() {
     setIsOpen(false);
@@ -19,6 +20,13 @@ export default function ArticleListItem(props: Props) {
 
   function openModal() {
     setIsOpen(true);
+  }
+  function slideOut() {
+    setSliding(false);
+  }
+
+  function slideIn() {
+    setSliding(true);
   }
 
   function formatDate(s: string) {
@@ -31,10 +39,16 @@ export default function ArticleListItem(props: Props) {
   }
 
   return (
-    <div className="rounded mt-2 p-2 flex h-32 shadow-md">
-      
+    <div
+      onMouseEnter={slideIn}
+      onMouseLeave={slideOut}
+      className="rounded mt-2 p-2 flex h-32 shadow-md"
+    >
       <div className="w-1/6 inline-block h-full relative mr-2">
-        <img className="h-4/5 aspect-auto mx-auto mt-2 rounded-xl" src={article.thumbnail} />
+        <img
+          className="h-4/5 aspect-auto mx-auto mt-2 rounded-xl"
+          src={article.thumbnail}
+        />
       </div>
       <div className="inline-block w-4/5">
         <div>
@@ -42,15 +56,25 @@ export default function ArticleListItem(props: Props) {
           <p className="text-base">{article.summary}</p>
         </div>
 
-        <div className="">
+        <div className="p-2 flex justify-between overflow-hidden">
           <p>{formatDate(article.date)}</p>
-          <button
-            type="button"
-            onClick={openModal}
-            className="font-extralight italic underline text-end w-full mr-40"
+          <Transition
+            show={isSliding}
+            enter="transition ease-ou-in delay-100 duration-1000 transform"
+            enterFrom="translate-x-full opacity-0"
+            enterTo="translate-x-0 opacity-100"
+            leave="transition ease-in-out duration-1000 transform"
+            leaveFrom="translate-x-0 opacity-100"
+            leaveTo="translate-x-full opacity-0"
           >
-            Read More
-          </button>
+            <button
+              type="button"
+              onClick={openModal}
+              className="font-extralight italic underline w-full hover:text-blue-300"
+            >
+              Read More
+            </button>
+          </Transition>
         </div>
 
         <Transition appear show={isOpen} as={Fragment}>

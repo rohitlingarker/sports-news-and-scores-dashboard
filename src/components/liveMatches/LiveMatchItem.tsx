@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { fetchMatchDetails } from "../../context/matches/actions";
 import { MatchItem } from "../../context/matches/reducer";
 import { Dialog, Transition } from "@headlessui/react";
+import "./index.css"
 
 type Props = {
   match: MatchItem;
@@ -10,14 +11,18 @@ type Props = {
 
 export default function LiveMatchItem(props: Props) {
   const [match,setMatch] = useState(props.match);
-  const [isOpen,setIsOpen] = useState(false)
+  const [isOpen,setIsOpen] = useState(false);
+  const [isRotating,setIsRotating] = useState(false);
+
 
   
 
 
   const refresh = async ()=>{
+    setIsRotating(true);
     const matchData = await fetchMatchDetails({id:match.id});
     setMatch(matchData);
+    setIsRotating(false)
   }
   console.log("score"+match.score);
 
@@ -44,11 +49,14 @@ export default function LiveMatchItem(props: Props) {
 
   return (
     <>
-      {match.isRunning && <div onClick={refresh} className="float-right cursor-pointer">
+      {match.isRunning && 
+      
+      <div onClick={refresh} className={`${isRotating?"rotating":""} float-right cursor-pointer`}>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
         </svg>
-      </div>}
+      </div>
+      }
       <h2 onClick={openModal()} className="text-lg text-white font-semi-bold cursor-pointer">{match.sportName}</h2>
       <p  onClick={openModal()} className="text-xs text-slate-400 mb-2" >{match.location}</p>
       <p  onClick={openModal()} className={`text-base font-light flex justify-between`}>  { match.teams[1].name } <span>{match.score !== undefined?match.score[match.teams[1].name]:"" }</span></p>

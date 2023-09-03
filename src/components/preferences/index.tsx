@@ -58,13 +58,8 @@ export default function Preferences() {
                   >
                     Choose your preferences
                   </Dialog.Title>
-                  {/* <div className="mt-2">
-                      <Suspense
-                        fallback={<div className="suspense">Loading...</div>}
-                      >
-                        <ArticleContent id={article.id} />
-                      </Suspense>
-                    </div> */}
+                  {/* <Sports/>
+                  <Teams /> */}
 
                   <div className="mt-4">
                     <button

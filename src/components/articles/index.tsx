@@ -2,7 +2,7 @@ import ArticlesList from "./ArticlesList";
 
 const Articles = ()=>{
     return(
-        <div className="live-matches-container">
+        <div className="container">
             <h1 className="text-xl font-bold underline mb-2">Trending News</h1>
             <div className="max-w-4xl">
                 <ArticlesList/>
