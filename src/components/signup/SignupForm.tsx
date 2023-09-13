@@ -39,7 +39,13 @@ const SignupForm: React.FC = () => {
       console.log(data);
 
       // Dialogue: After successful signin, first we will save the token in localStorage
-      localStorage.setItem("authToken", data.token);
+      localStorage.setItem("authToken", data.auth_token);
+      if(!data.user.preferences){
+        data.user.preferences = {
+          preferredSports:[],
+          preferredTeams:[]
+        }
+      }
       localStorage.setItem("userData", JSON.stringify(data.user));
 
       navigate("/dashboard");
