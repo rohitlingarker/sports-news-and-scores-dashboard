@@ -43,9 +43,9 @@ export default function FavItem(props: Props) {
       onMouseLeave={slideOut}
       className="rounded mt-2 p-2 flex  shadow-md"
     >
-      <div className="w-1/6 inline-block h-full relative mr-2">
+      <div className="w-1/6  relative mr-2 flex items-center justify-center ">
         <img
-          className="h-4/5 aspect-auto mx-auto mt-2 rounded-xl"
+          className=" aspect-auto mx-auto mt-2 rounded"
           src={article.thumbnail}
         />
       </div>

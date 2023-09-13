@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     children:[
       {index:true, element:<>
       <LiveMatches/>
-      <div className="grid gap-2 mt-3 bg-gray-300 p-4 rounded-lg grid-cols-10">
+      <div className="grid gap-2 mt-3 bg-gray-300 p-4 rounded-lg grid-cols-12">
         <Articles/>
         <Favourites/>
       </div>

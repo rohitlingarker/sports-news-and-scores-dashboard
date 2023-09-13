@@ -21,7 +21,7 @@ const Home: React.FC = () => {
       <>
       <Navbar isLoggedIn={isLoggedIn} handleSignOut={handleSignOut} />
       <main>
-        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <div className="mx-16 max-w-full py-6 sm:px-6 lg:px-8">
           {/* <LiveMatches/>
           <Articles/> */}
           <Outlet/>

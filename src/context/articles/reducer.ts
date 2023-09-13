@@ -52,7 +52,7 @@ export const reducer = (
           ...state,
           isLoading: false,
           filteredArticles: action.payload,
-          originalArticleList:state.filteredArticles,
+          originalArticleList:action.payload,
         };
       case "FETCH_ARTICLES_FAILURE":
         return {
