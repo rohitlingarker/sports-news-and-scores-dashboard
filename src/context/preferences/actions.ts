@@ -25,8 +25,8 @@ export async function getPreferences(dispatch: PreferencesDispatch) {
       };
     }
     // console.log(parsedUserData);
-    const userData = JSON.stringify(parsedUserData)
-    localStorage.setItem("userData",userData)
+    const userData = JSON.stringify(parsedUserData);
+    localStorage.setItem("userData", userData);
 
     dispatch({
       type: "UPDATE_PREFERENCES",
@@ -81,7 +81,6 @@ export function emptyPreferences(dispatch: PreferencesDispatch) {
     preferredSports: [],
     preferredTeams: [],
   };
-  console.log("emptying");
 
   dispatch({ type: "UPDATE_PREFERENCES", payload: defaultPrefs });
 }

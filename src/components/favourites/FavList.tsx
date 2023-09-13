@@ -19,7 +19,6 @@ export default function FavList() {
     if (articleState) {
       setArticles(articleState.originalArticleList);
     }
-    
   }, [articleState]);
 
   // Filter articles based on the selected sport and team
@@ -60,7 +59,6 @@ export default function FavList() {
   const teamsForSelectedSport = selectedSport
     ? teamState?.filter((team) => team.plays === selectedSport.name) || []
     : [];
-  console.log(teamsForSelectedSport, teamState, "teamsForSelectedSport");
 
   return (
     <>

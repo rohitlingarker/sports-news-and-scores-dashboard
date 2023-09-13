@@ -52,7 +52,9 @@ export default function FavItem(props: Props) {
       <div className="inline-block w-4/5">
         <div>
           <h2 className="text-lg font-semibold ">{article.title}</h2>
-          <div className="text-base h-12 text-ellipsis overflow-hidden whitespace-pre-wrap">{article.summary}</div>
+          <div className="text-base h-12 text-ellipsis overflow-hidden whitespace-pre-wrap">
+            {article.summary}
+          </div>
         </div>
 
         <div className="p-2 flex justify-between overflow-hidden">
@@ -108,7 +110,10 @@ export default function FavItem(props: Props) {
                     >
                       {article.title}
                     </Dialog.Title>
-                    <img className="w-4/5 aspect-auto m-auto rounded-lg" src={article.thumbnail} />
+                    <img
+                      className="w-4/5 aspect-auto m-auto rounded-lg"
+                      src={article.thumbnail}
+                    />
                     <div className="mt-2">
                       <Suspense
                         fallback={<div className="suspense">Loading...</div>}

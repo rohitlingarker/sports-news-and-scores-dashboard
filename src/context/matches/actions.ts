@@ -32,13 +32,12 @@ export const fetchMatches = async (dispatch: any) => {
 
     if (userData) {
       const userPreferences = await JSON.parse(userData).preferences;
-      console.log("userPreferences",userPreferences);
-      
+
       filterMatches(dispatch, matches, userPreferences);
       dispatch({
-        type:"UPDATE",
-        payload:matches
-      })
+        type: "UPDATE",
+        payload: matches,
+      });
     } else {
       dispatch({
         type: "FETCH_MATCHES_SUCCESS",

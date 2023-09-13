@@ -2,8 +2,6 @@
 
 import { PreferenceState, initialState, PreferencesActions } from "./types";
 
-
-
 export const reducer = (
   state: PreferenceState = initialState,
   action: PreferencesActions
@@ -16,7 +14,6 @@ export const reducer = (
       const isSportPreferred = state.preferredSports.includes(sportName);
       // If the sport is already preferred, remove it; otherwise, add it
       if (isSportPreferred) {
-        console.log();
         return {
           ...state,
           preferredSports: state.preferredSports.filter(
@@ -50,4 +47,3 @@ export const reducer = (
       return state;
   }
 };
-

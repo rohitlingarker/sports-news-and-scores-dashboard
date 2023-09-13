@@ -12,35 +12,35 @@ const router = createBrowserRouter([
   {
     path: "dashboard",
     element: <Home />,
-    children:[
-      {index:true, element:<>
-      <LiveMatches/>
-      <div className="grid gap-2 mt-3 bg-gray-300 p-4 rounded-lg grid-cols-12">
-        <Articles/>
-        <Favourites/>
-      </div>
-      </>}
-    ]
+    children: [
+      {
+        index: true,
+        element: (
+          <>
+            <LiveMatches />
+            <div className="grid gap-2 mt-3 bg-gray-300 p-4 rounded-lg grid-cols-12">
+              <Articles />
+              <Favourites />
+            </div>
+          </>
+        ),
+      },
+    ],
   },
   {
     path: "signin",
-    element: <Home/>,
-    children : [
-      { index: true ,element:<Signin />}
-      ]
+    element: <Home />,
+    children: [{ index: true, element: <Signin /> }],
   },
   {
     path: "signup",
-    element: <Home/>,
-    children :[
-      { index: true  ,element:<Signup />}
-      ]
+    element: <Home />,
+    children: [{ index: true, element: <Signup /> }],
   },
   {
-    path:"signout",
-    element:<Signout/>,
-
-  }
+    path: "signout",
+    element: <Signout />,
+  },
 ]);
 
 export default router;

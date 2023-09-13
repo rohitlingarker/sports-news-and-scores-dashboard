@@ -13,9 +13,15 @@ import {
   setPreferences,
 } from "../../context/preferences/actions";
 import { filterArticles } from "../../context/articles/actions";
-import { useArticleState, useArticlesDispatch } from "../../context/articles/context";
+import {
+  useArticleState,
+  useArticlesDispatch,
+} from "../../context/articles/context";
 import { filterMatches } from "../../context/matches/actions";
-import { useMatchState, useMatchesDispatch } from "../../context/matches/context";
+import {
+  useMatchState,
+  useMatchesDispatch,
+} from "../../context/matches/context";
 
 export default function Preferences() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,36 +38,44 @@ export default function Preferences() {
 
   const closeModal = () => {
     setIsOpen(false);
-    if (preferenceState)
-    setPreferences(preferenceState);
+    if (preferenceState) setPreferences(preferenceState);
   };
 
   useEffect(() => {
     // if (preferencesDispatch) getPreferences(preferencesDispatch);
-    (async ()=>{
-      if (preferencesDispatch)
-      getPreferences(preferencesDispatch);
-      
-      if (articlesDispatch && articleState && articleState.filteredArticles.length && preferenceState) {
-        filterArticles(articlesDispatch, articleState.originalArticleList, preferenceState);
+    (async () => {
+      if (preferencesDispatch) getPreferences(preferencesDispatch);
+
+      if (
+        articlesDispatch &&
+        articleState &&
+        articleState.filteredArticles.length &&
+        preferenceState
+      ) {
+        filterArticles(
+          articlesDispatch,
+          articleState.originalArticleList,
+          preferenceState
+        );
       }
     })();
   }, []);
-    // useEffect to filter articles based on preferenceState
-    useEffect(() => {
-      if (articlesDispatch && articleState && preferenceState) 
-        filterArticles(articlesDispatch, articleState.originalArticleList, preferenceState); 
-      
-      if (matchesDispatch && matchState && preferenceState)
-        filterMatches(matchesDispatch,matchState.originalMatches,preferenceState)
-        
-      console.log("its changing");
-        
-        
-    }, [preferenceState, articlesDispatch]);
+  // useEffect to filter articles based on preferenceState
+  useEffect(() => {
+    if (articlesDispatch && articleState && preferenceState)
+      filterArticles(
+        articlesDispatch,
+        articleState.originalArticleList,
+        preferenceState
+      );
 
-
-  
+    if (matchesDispatch && matchState && preferenceState)
+      filterMatches(
+        matchesDispatch,
+        matchState.originalMatches,
+        preferenceState
+      );
+  }, [preferenceState, articlesDispatch]);
 
   return (
     <div className="iniline-block">

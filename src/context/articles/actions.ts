@@ -17,14 +17,12 @@ export const fetchArticles = async (dispatch: any) => {
     const userData = localStorage.getItem("userData");
 
     if (userData) {
-      console.log(userData);
-
       const parsedUserData = await JSON.parse(userData);
       filterArticles(dispatch, articles, parsedUserData.preferences);
       dispatch({
-        type:"UPDATE_ARTICLES",
-        payload:articles
-      })
+        type: "UPDATE_ARTICLES",
+        payload: articles,
+      });
     } else {
       dispatch({
         type: "FETCH_ARTICLES_SUCCESS",
@@ -52,8 +50,6 @@ export function filterArticles(
     });
     return;
   }
-
-  console.log("original articles", originalArticles);
 
   // Filter articles based on preferred sports and teams.
   const filteredArticles = originalArticles.filter((article) => {

@@ -112,7 +112,10 @@ export default function ArticleListItem(props: Props) {
                     >
                       {article.title}
                     </Dialog.Title>
-                    <img className="w-4/5 aspect-auto m-auto rounded-lg" src={article.thumbnail} />
+                    <img
+                      className="w-4/5 aspect-auto m-auto rounded-lg"
+                      src={article.thumbnail}
+                    />
                     <div className="mt-2">
                       <Suspense
                         fallback={<div className="suspense">Loading...</div>}

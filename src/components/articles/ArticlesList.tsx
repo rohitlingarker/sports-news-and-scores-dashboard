@@ -29,7 +29,6 @@ export default function ArticlesList() {
     if (articleState && !articleState.filteredArticles.length) {
       // Fetch only if articles are not already loaded
       fetchData();
-      console.log(".................", articleState);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [articlesDispatch]);
@@ -54,11 +53,9 @@ export default function ArticlesList() {
   }, [selectedSport, articleState]);
 
   if (articleState) {
-    const { filteredArticles, isLoading, isError, errorMessage } = articleState;
+    const { isLoading, isError, errorMessage } = articleState;
     // if (articlesDispatch && state && preferenceState)
     // filterArticles(articlesDispatch,state.originalArticleList,preferenceState);
-
-    console.log("filteredArticles in component", filteredArticles);
 
     if (isLoading) {
       return <span>Loading...</span>;
@@ -73,7 +70,9 @@ export default function ArticlesList() {
         <div className="flex overflow-auto gap-4 whitespace-nowrap text-sm ">
           {
             <div
-              className={`${selectedSport === "yourNews" ? "selected" : ""} cursor-pointer p-2`}
+              className={`${
+                selectedSport === "yourNews" ? "selected" : ""
+              } cursor-pointer p-2`}
               onClick={() => {
                 setSelectedSport("yourNews");
               }}
@@ -82,7 +81,9 @@ export default function ArticlesList() {
             </div>
           }
           <div
-            className={`${selectedSport === "all" ? "selected" : ""} cursor-pointer p-2`}
+            className={`${
+              selectedSport === "all" ? "selected" : ""
+            } cursor-pointer p-2`}
             onClick={() => {
               setSelectedSport("all");
             }}
