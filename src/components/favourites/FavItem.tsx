@@ -2,14 +2,14 @@ import { Fragment, Suspense, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ArticleItem } from "../../context/articles/reducer";
 import React from "react";
+import ArticleContent from "../articles/ArticleContent";
 // import ArticleContent from './ArticleContent';
-const ArticleContent = React.lazy(() => import("./ArticleContent"));
 
 interface Props {
   article: ArticleItem;
 }
 
-export default function ArticleListItem(props: Props) {
+export default function FavItem(props: Props) {
   const article = props.article;
   const [isOpen, setIsOpen] = useState(false);
   const [isSliding, setSliding] = useState(false);
@@ -42,7 +42,7 @@ export default function ArticleListItem(props: Props) {
     <div
       onMouseEnter={slideIn}
       onMouseLeave={slideOut}
-      className="rounded mt-2 p-2 flex h-32 shadow-md"
+      className="rounded mt-2 p-2 flex  shadow-md"
     >
       <div className="w-1/6 inline-block h-full relative mr-2">
         <img
@@ -53,10 +53,7 @@ export default function ArticleListItem(props: Props) {
       <div className="inline-block w-4/5">
         <div>
           <h2 className="text-lg font-semibold ">{article.title}</h2>
-
-          <div className="text-base h-12 text-ellipsis overflow-hidden whitespace-pre-wrap">
-            {article.summary}
-          </div>
+          <div className="text-base h-12 text-ellipsis overflow-hidden whitespace-pre-wrap">{article.summary}</div>
         </div>
 
         <div className="p-2 flex justify-between overflow-hidden">
@@ -112,7 +109,6 @@ export default function ArticleListItem(props: Props) {
                     >
                       {article.title}
                     </Dialog.Title>
-                    <img className="w-4/5 aspect-auto m-auto rounded-lg" src={article.thumbnail} />
                     <div className="mt-2">
                       <Suspense
                         fallback={<div className="suspense">Loading...</div>}

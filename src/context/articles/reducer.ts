@@ -1,9 +1,7 @@
-import { Team } from "../matches/reducer";
+import { Sport } from "../sports/reducer";
+import { Team } from "../teams/reducer";
 
-export interface Sport{
-    id:number,
-    name: string
-}
+
 
 export type ArticleItem = {
     id: number,
@@ -16,14 +14,16 @@ export type ArticleItem = {
 }
 
 export interface ArticleState{
-    articles:ArticleItem[];
+    filteredArticles:ArticleItem[];
+    originalArticleList:ArticleItem[];
     isLoading:boolean;
     isError: boolean;
     errorMessage: string;
 }
 
 export const initialState: ArticleState = {
-    articles: [],
+    filteredArticles: [],
+    originalArticleList:[],
     isLoading: false,
     isError: false,
     errorMessage: "",
@@ -32,7 +32,9 @@ export const initialState: ArticleState = {
 export type ArticlesActions =
 | { type: "FETCH_ARTICLES_REQUEST" }
 | { type: "FETCH_ARTICLES_SUCCESS"; payload: ArticleItem[] }
-| { type: "FETCH_ARTICLES_FAILURE"; payload: string };
+| { type: "FETCH_ARTICLES_FAILURE"; payload: string }
+| { type: "FILTER_ARTICLES"; payload: ArticleItem[] }
+| { type: "UPDATE_ARTICLES"; payload: ArticleItem[] }
 
 
 export const reducer = (
@@ -49,7 +51,8 @@ export const reducer = (
         return {
           ...state,
           isLoading: false,
-          articles: action.payload,
+          filteredArticles: action.payload,
+          originalArticleList:state.filteredArticles,
         };
       case "FETCH_ARTICLES_FAILURE":
         return {
@@ -58,6 +61,17 @@ export const reducer = (
           isError: true,
           errorMessage: action.payload,
         };
+      case "FILTER_ARTICLES":
+        return {
+          ...state,
+          filteredArticles: action.payload,
+        };
+      case "UPDATE_ARTICLES":
+        return {
+          ...state,
+          isLoading:false,
+          originalArticleList:action.payload
+        }
       default:
         return state;
     }

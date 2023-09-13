@@ -1,7 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useReducer } from "react";
+import { reducer } from "./reducer";
+import { MatchState, MatchesActions, initialState } from "./types";
 
-import { reducer, initialState, MatchState, MatchesActions } from "./reducer";
 
 const MatchStateContext = createContext<MatchState | undefined>(undefined);
 

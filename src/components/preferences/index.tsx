@@ -1,8 +1,29 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import Sports from "./Sports";
+import Teams from "./Teams";
+import "./index.css";
+import {
+  usePreferenceState,
+  usePreferencesDispatch,
+} from "../../context/preferences/context";
+import {
+  getPreferences,
+  setPreferences,
+} from "../../context/preferences/actions";
+import { filterArticles } from "../../context/articles/actions";
+import { useArticleState, useArticlesDispatch } from "../../context/articles/context";
+import { filterMatches } from "../../context/matches/actions";
+import { useMatchState, useMatchesDispatch } from "../../context/matches/context";
 
 export default function Preferences() {
   const [isOpen, setIsOpen] = useState(false);
+  const preferenceState = usePreferenceState();
+  const preferencesDispatch = usePreferencesDispatch();
+  const articleState = useArticleState();
+  const articlesDispatch = useArticlesDispatch();
+  const matchState = useMatchState();
+  const matchesDispatch = useMatchesDispatch();
 
   const openModal = () => {
     setIsOpen(true);
@@ -10,18 +31,41 @@ export default function Preferences() {
 
   const closeModal = () => {
     setIsOpen(false);
+    if (preferenceState)
+    setPreferences(preferenceState);
   };
 
+  useEffect(() => {
+    // if (preferencesDispatch) getPreferences(preferencesDispatch);
+    (async ()=>{
+      if (preferencesDispatch)
+      getPreferences(preferencesDispatch);
+      
+      if (articlesDispatch && articleState && articleState.filteredArticles.length && preferenceState) {
+        filterArticles(articlesDispatch, articleState.originalArticleList, preferenceState);
+      }
+    })();
+  }, []);
+    // useEffect to filter articles based on preferenceState
+    useEffect(() => {
+      if (articlesDispatch && articleState && preferenceState) 
+        filterArticles(articlesDispatch, articleState.originalArticleList, preferenceState); 
+      
+      if (matchesDispatch && matchState && preferenceState)
+        filterMatches(matchesDispatch,matchState.originalMatches,preferenceState)
+        
+      console.log("its changing");
+        
+        
+    }, [preferenceState, articlesDispatch]);
 
+
+  
 
   return (
     <div className="iniline-block">
       <div className="">
-        <button
-          type="button"
-          onClick={openModal}
-          className=""
-        >
+        <button type="button" onClick={openModal} className="">
           Preferences
         </button>
       </div>
@@ -58,8 +102,8 @@ export default function Preferences() {
                   >
                     Choose your preferences
                   </Dialog.Title>
-                  {/* <Sports/>
-                  <Teams /> */}
+                  <Sports />
+                  <Teams />
 
                   <div className="mt-4">
                     <button

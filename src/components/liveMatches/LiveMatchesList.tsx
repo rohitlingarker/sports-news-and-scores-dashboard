@@ -1,8 +1,8 @@
 import LiveMatchItem from "./LiveMatchItem";
-import { MatchItem } from "../../context/matches/reducer";
 import { useMatchState, useMatchesDispatch } from "../../context/matches/context";
 import { useEffect } from "react";
 import { fetchMatches } from "../../context/matches/actions";
+import { MatchItem } from "../../context/matches/types";
 
 export default function LiveMatchesList() {
   const state = useMatchState();
@@ -11,10 +11,10 @@ export default function LiveMatchesList() {
     fetchMatches(matchesDispatch);
   },[matchesDispatch])
   if (state){
-    const { matches, isLoading, isError, errorMessage } = state;
+    const { filteredMatches, isLoading, isError, errorMessage } = state;
     
   
-  console.log("matches in livelist",matches);
+  console.log("matches in livelist",filteredMatches);
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -27,7 +27,7 @@ export default function LiveMatchesList() {
 
   return (
     <>
-      {matches.map((matchItem: MatchItem) => {
+      {filteredMatches.map((matchItem: MatchItem) => {
         return (
           <div
             key={matchItem.id}

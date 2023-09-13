@@ -1,47 +1,4 @@
-export type Team = {
-    id: number
-    name: string,
-}
-
-export type MatchItem = {
-    startsAt:string,
-    endsAt: string,
-    id: number,
-    isRunning: boolean,
-    location: string,
-    name: string,
-    sportName: string,
-    teams:Team[],
-    score:{
-      [teamName: string]: string;
-    },
-    playingTeam:number,
-    story:string
-}
-
-export interface MatchState{
-    matches:MatchItem[];
-    isLoading:boolean;
-    isError: boolean;
-    errorMessage: string;
-}
-
-export const initialState: MatchState = {
-    matches: [],
-    isLoading: false,
-    isError: false,
-    errorMessage: "",
-  };
-
-export type MatchesActions =
-| { type: "FETCH_MATCHES_REQUEST" }
-| { type: "FETCH_MATCHES_SUCCESS"; payload: MatchItem[] }
-| { type: "FETCH_MATCHES_FAILURE"; payload: string }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-| { type: "FETCH_DETAILS_SUCCESS"; payload: any }
-| { type: "UPDATE_ALL_MATCHES"; payload: MatchItem[] }
-
-
+import { MatchState, initialState, MatchesActions } from "./types";
 
 
 export const reducer = (
@@ -58,7 +15,8 @@ export const reducer = (
         return {
           ...state,
           isLoading: false,
-          matches: action.payload,
+          originalMatches: action.payload,
+          filteredMatches:action.payload
         };
       case "FETCH_MATCHES_FAILURE":
         return {
@@ -71,7 +29,7 @@ export const reducer = (
           const { matchId, updatedMatchData } = action.payload;
 
           // Find the index of the match item to update
-          const matchIndex = state.matches.findIndex((match) => match.id === matchId);
+          const matchIndex = state.filteredMatches.findIndex((match) => match.id === matchId);
     
           if (matchIndex === -1) {
             // If the match item is not found, return the current state
@@ -82,8 +40,8 @@ export const reducer = (
           const newState = { ...state };
     
           // Update the specific match item in the copied state
-          newState.matches[matchIndex] = {
-            ...newState.matches[matchIndex],
+          newState.filteredMatches[matchIndex] = {
+            ...newState.filteredMatches[matchIndex],
             ...updatedMatchData,
           };
           console.log("newState",newState);
@@ -95,7 +53,20 @@ export const reducer = (
       case "UPDATE_ALL_MATCHES":
         return {
           ...state,
-          matches: action.payload,
+          filteredMatches: action.payload,
+        }
+      case "FILTER_MATCHES":
+        return {
+          ...state,
+          isLoading:false,
+          filteredMatches:action.payload
+        }
+      case "UPDATE":
+        return {
+          ...state,
+          isLoading:false,
+          originalMatches:action.payload
+
         }
       
       default:

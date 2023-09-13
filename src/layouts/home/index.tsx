@@ -9,13 +9,13 @@ const Home: React.FC = () => {
   const isLoggedIn = !!localStorage.getItem('authToken');
   const navigate = useNavigate();
 
-  const handleSignOut = () => {
-    // Handle sign out logic, e.g., remove authToken from localStorage
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userData');
-    navigate('/dashboard');
-    // Perform any other necessary cleanup or redirection
-  };
+  
+
+  
+
+  function handleSignOut(): void {
+    navigate("/signout")
+  }
 
   return (
       <>
