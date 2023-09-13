@@ -1,7 +1,6 @@
 import { Fragment, Suspense, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ArticleItem } from "../../context/articles/reducer";
-import React from "react";
 import ArticleContent from "../articles/ArticleContent";
 // import ArticleContent from './ArticleContent';
 

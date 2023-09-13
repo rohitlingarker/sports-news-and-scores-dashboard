@@ -9,6 +9,7 @@ const Signout = () => {
     localStorage.removeItem("authToken")
     localStorage.removeItem("userData")
     if (preferencesDispatch)emptyPreferences(preferencesDispatch)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
   return <Navigate to="/dashboard" />;

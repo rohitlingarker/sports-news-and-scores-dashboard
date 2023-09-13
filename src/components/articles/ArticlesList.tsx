@@ -26,6 +26,7 @@ export default function ArticlesList() {
       fetchData();
       console.log(".................", articleState);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [articlesDispatch]);
 
   if (articleState) {

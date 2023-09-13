@@ -12,6 +12,7 @@ export default function Favourites() {
   useEffect(() => {
     if (teamDispatch) fetchTeams(teamDispatch);
     if (sportsDispatch) fetchSports(sportsDispatch);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className=" col-span-3 bg-zinc-200 rounded px-2">
